@@ -1,0 +1,103 @@
+   int pos = hashFunction(rec.getKey());
+
+        LinearNode <Record> RecordNode;
+        RecordNode = new LinearNode<Record>(rec);
+        LinearNode <Record> Reference = new LinearNode<>();
+
+        if (recordHashTable[pos]!= null){
+            //System.out.println(pos);
+
+
+            Record rec2 = new Record("34", pos, pos);
+            LinearNode <Record> ReferenceNode= new LinearNode<>(rec2);
+            ReferenceNode = recordHashTable[pos];
+
+            while (ReferenceNode.getElement().getKey() != rec.getKey() && ReferenceNode.getNext()!=null){
+                ReferenceNode = ReferenceNode.getNext();
+            }
+
+            if (ReferenceNode.getElement().getKey() ==  rec.getKey()){
+                throw new DuplicatedKeyException("Duplicated Keys!");
+            }
+            else {
+
+                Reference = recordHashTable[pos];
+                recordHashTable[pos].setNext(RecordNode);
+                RecordNode.setNext(Reference);
+
+                return 1;
+            }        
+
+            
+        }
+        else {
+            recordHashTable[pos] = (RecordNode);
+            return 0;
+        }
+        
+      
+    }
+
+
+
+
+
+
+
+     int pos = hashFunction(key);
+        if (recordHashTable[pos] == null )
+            throw new InexistentKeyException("Inexistent Key");
+        else {
+            LinearNode <Record> before = new LinearNode<>();
+            LinearNode <Record> current = new LinearNode<>();
+
+            before = null;
+            current = recordHashTable[pos];
+
+            while (current.getElement().getKey()!= key && current.getNext()!= null){
+                before = current;
+                current = current.getNext();
+            }
+
+            if (current.getElement().getKey()== key){
+                if (before == null)
+                    recordHashTable[pos] = null;
+                else 
+                    before.setNext(null);
+            
+                
+            }
+            else {
+                throw new InexistentKeyException("Inexistent key");
+            }
+            
+        }
+
+
+
+
+
+ int pos = hashFunction(rec.getKey());
+
+        LinearNode <Record> r = new LinearNode<Record>(rec);
+        LinearNode <Record> current = new LinearNode<Record>();
+
+        if (recordHashTable[pos]!=null){
+
+            current = recordHashTable[pos];
+
+           
+
+            while (current.getNext()!=null){
+                current = current.getNext();
+            }
+            
+            current.setNext(r);
+
+            return 1;
+        }
+
+        else {
+            recordHashTable[pos] = r;
+            return 0;
+        }
